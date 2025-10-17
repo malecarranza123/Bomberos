@@ -21,10 +21,10 @@ const incidents = [
 ];
 
 const personnel = [
-  { name: 'Juan Pérez', rank: 'Capitán', status: 'Disponible', specialty: 'Rescate' },
-  { name: 'María González', rank: 'Teniente', status: 'En servicio', specialty: 'Incendios' },
-  { name: 'Carlos Ruiz', rank: 'Bombero', status: 'Disponible', specialty: 'Primeros auxilios' },
-  { name: 'Ana Martínez', rank: 'Cabo', status: 'Descanso', specialty: 'Materiales peligrosos' },
+  { name: 'Juan Pérez', rank: 'Capitán', status: 'Disponible' },
+  { name: 'María González', rank: 'Teniente', status: 'En servicio' },
+  { name: 'Carlos Ruiz', rank: 'Bombero', status: 'Disponible' },
+  { name: 'Ana Martínez', rank: 'Cabo', status: 'Descanso' },
 ];
 
 const vehicles = [
@@ -74,7 +74,6 @@ function renderTab(tab) {
           <div class="item"> <b>Incidentes activos:</b> 2</div>
           <div class="item"> <b>Personal disponible:</b> 2 de 4</div>
           <div class="item"> <b>Unidades activas:</b> 1</div>
-          <div class="item"> <b>Tiempo respuesta:</b> 4.2 min</div>
         </div>`;
       break;
 
@@ -94,7 +93,6 @@ function renderTab(tab) {
         <div class="item">
           <b>${p.name}</b> - ${p.rank}<br>
           Estado: ${p.status}<br>
-          Especialidad: ${p.specialty}
         </div>`).join('');
       break;
 
