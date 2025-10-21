@@ -13,7 +13,7 @@ const toggleTheme2 = document.getElementById('toggle-theme2');
 
 let isDark = true;
 
-// Datos
+// Datos simulados
 const incidents = [
   { type: 'Incendio estructural', location: 'Calle Principal 123', status: 'En curso', priority: 'Alta', time: '14:30' },
   { type: 'Rescate vehicular', location: 'Ruta 9 Km 45', status: 'Completado', priority: 'Media', time: '12:15' },
@@ -21,10 +21,10 @@ const incidents = [
 ];
 
 const personnel = [
-  { name: 'Juan Pérez', rank: 'Capitán', status: 'Disponible' },
-  { name: 'María González', rank: 'Teniente', status: 'En servicio' },
-  { name: 'Carlos Ruiz', rank: 'Bombero', status: 'Disponible' },
-  { name: 'Ana Martínez', rank: 'Cabo', status: 'Descanso' },
+  { name: 'Juan Pérez', rank: 'Capitán', status: 'Disponible', specialty: 'Rescate' },
+  { name: 'María González', rank: 'Teniente', status: 'En servicio', specialty: 'Incendios' },
+  { name: 'Carlos Ruiz', rank: 'Bombero', status: 'Disponible', specialty: 'Primeros auxilios' },
+  { name: 'Ana Martínez', rank: 'Cabo', status: 'Descanso', specialty: 'Materiales peligrosos' },
 ];
 
 const vehicles = [
@@ -71,9 +71,10 @@ function renderTab(tab) {
     case 'dashboard':
       content.innerHTML = `
         <div class="card-list">
-          <div class="item"> <b>Incidentes activos:</b> 2</div>
-          <div class="item"> <b>Personal disponible:</b> 2 de 4</div>
-          <div class="item"> <b>Unidades activas:</b> 1</div>
+          <div class="item"><b>Incidentes activos:</b> 2</div>
+          <div class="item"><b>Personal disponible:</b> 2 de 4</div>
+          <div class="item"><b>Unidades activas:</b> 1</div>
+          <div class="item"><b>Tiempo de respuesta:</b> 4.2 min</div>
         </div>`;
       break;
 
@@ -81,8 +82,8 @@ function renderTab(tab) {
       content.innerHTML = incidents.map(i => `
         <div class="item">
           <b>${i.type}</b><br>
-           ${i.location}<br>
-           ${i.time}<br>
+          ${i.location}<br>
+          ${i.time}<br>
           ⚠️ Prioridad: ${i.priority}<br>
           Estado: ${i.status}
         </div>`).join('');
@@ -93,6 +94,7 @@ function renderTab(tab) {
         <div class="item">
           <b>${p.name}</b> - ${p.rank}<br>
           Estado: ${p.status}<br>
+          Especialidad: ${p.specialty}
         </div>`).join('');
       break;
 
@@ -122,5 +124,6 @@ function toggleThemeMode() {
   toggleTheme.textContent = isDark ? '☀️' : '🌙';
   toggleTheme2.textContent = isDark ? '☀️' : '🌙';
 }
+
 toggleTheme.addEventListener('click', toggleThemeMode);
 toggleTheme2.addEventListener('click', toggleThemeMode);
