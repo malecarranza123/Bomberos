@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Bomberos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark">
+
+    <div id="app" class="hidden">
+    <header class="header-app">
+        <div class="contenedor-img"></div>
+        <img src="img/logoBombero.png" width="70" height="70">
+        <h1>Sistema de Gestión de Bomberos</h1>
+        <div class="user-controls">
+            <span id="welcome-user"></span>
+            <button id="toggle-theme2">☀️</button>
+            <button id="logout-btn">Salir</button>
+        </div>
+        </header>
+
+        <nav class="tabs">
+        <button data-tab="dashboard" class="active">Panel</button>
+        <button data-tab="incidents">Incidentes</button>
+        <button data-tab="personnel">Personal</button>
+        <button data-tab="vehicles">Vehículos</button>
+        <button data-tab="reports">Informes</button>
+        <button data-tab="schedule">Turnos</button>
+        </nav>
+
+        <main id="content"></main>
+    </div>
+
+        <script src="script.js"></script>
+      </body>
+      </html>
