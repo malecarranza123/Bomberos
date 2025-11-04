@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión de Bomberos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark">
+  <div id="app">
+    <header class="header-app">
+      <div class="contenedor-img">
+        <img src="img/logoBombero.png" width="70" height="70">
+      </div>
+      <h1>Sistema de Gestión de Bomberos</h1>
+      <div class="user-controls">
+        <span id="welcome-user"></span>
+        <button id="toggle-theme2">☀️</button>
+        <button id="logout-btn">Salir</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button data-tab="dashboard" class="active">Resumen</button>
+      <button data-tab="personal">Personal</button>
+      <button data-tab="camiones">Camiones</button>
+      <button data-tab="salidas">Salidas</button>
+    </nav>
+
+    <main id="content"></main>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Verifica usuario logueado
+    const usuario = localStorage.getItem('usuario');
+    const userSpan = document.getElementById('welcome-user');
+    if (usuario) {
+      userSpan.textContent = `Bienvenido, ${usuario}`;
+    } else {
+      window.location.href = 'login.html';
+    }
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('usuario');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
