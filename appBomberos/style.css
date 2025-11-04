@@ -46,33 +46,6 @@ input {
   border-radius: 6px;
   border: none;
 }
-
-/* Reubicar correctamente el botón y centrar el logo */
-.header {
-  position: relative; /* Para que el botón se posicione dentro del contenedor */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Botón de cambio de tema (login) */
-#toggle-theme {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: transparent;
-  font-size: 1.5rem;
-  cursor: pointer;
-  border: none;
-  color: inherit;
-}
-
-/* Centrar el logo */
-.header img {
-  display: block;
-  margin: 2rem auto 1rem auto;
-}
 button {
   padding: 10px 16px;
   border: none;

@@ -34,7 +34,7 @@
 
   <script src="script.js"></script>
   <script>
-    // Mostrar nombre guardado
+    // Verifica usuario logueado
     const usuario = localStorage.getItem('usuario');
     const userSpan = document.getElementById('welcome-user');
     if (usuario) {
@@ -42,12 +42,14 @@
     } else {
       window.location.href = 'login.html';
     }
-
-    // Cerrar sesión
+  
+    // Logout
     document.getElementById('logout-btn').addEventListener('click', () => {
       localStorage.removeItem('usuario');
+      sessionStorage.setItem('fromLogout', '1');
       window.location.href = 'login.html';
     });
   </script>
+  
 </body>
 </html>
