@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema Bomberos</title>
+  <title>Sistema de Gestión de Bomberos</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark">
@@ -21,12 +21,10 @@
     </header>
 
     <nav class="tabs">
-      <button data-tab="dashboard" class="active">Panel</button>
-      <button data-tab="incidents">Incidentes</button>
-      <button data-tab="personnel">Personal</button>
-      <button data-tab="vehicles">Vehículos</button>
-      <button data-tab="reports">Informes</button>
-      <button data-tab="schedule">Turnos</button>
+      <button data-tab="dashboard" class="active">Resumen</button>
+      <button data-tab="personal">Personal</button>
+      <button data-tab="camiones">Camiones</button>
+      <button data-tab="salidas">Salidas</button>
     </nav>
 
     <main id="content"></main>
@@ -42,14 +40,12 @@
     } else {
       window.location.href = 'login.html';
     }
-  
+
     // Logout
     document.getElementById('logout-btn').addEventListener('click', () => {
       localStorage.removeItem('usuario');
-      sessionStorage.setItem('fromLogout', '1');
       window.location.href = 'login.html';
     });
   </script>
-  
 </body>
 </html>
