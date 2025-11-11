@@ -3,58 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema Bomberos</title>
+  <title>Login - Sistema Bomberos</title>
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body class="dark">
-  <button id="toggle-theme">☀️</button>
-  <!-- Pantalla de login -->
   <div id="login" class="container">
-      <div class="card">
-        <div class="header">
-          <div class="contenedor-flex"></div>
-            <img src="img/logoBombero.png" alt="Logo de bomberos" width="150" height="150">
-          </div>
-
-          <div class="form">
-            <label>Usuario</label>
-            <input type="text" id="username" placeholder="Ingrese su usuario">
-            
-            <label>Contraseña</label>
-            <input type="password" id="password" placeholder="Ingrese su contraseña">
-
-            <button id="login-btn">Iniciar Sesión</button>
-            <p class="info">(use cualquier usuario/contraseña)</p>
-          </div>
-        </div>
+    <div class="card">
+      <div class="header">
+        <img src="img/logoBombero.png" alt="Logo de bomberos" width="150" height="150">
+        <button id="toggle-theme">☀️</button>
       </div>
 
-      <!-- Aplicación -->
-      <div id="app" class="hidden">
-        <header class="header-app">
-          <div class="contenedor-img"></div>
-            <img src="img/logoBombero.png" width="70" height="70">
-            <h1>Sistema de Gestión de Bomberos</h1>
-            <div class="user-controls">
-              <span id="welcome-user"></span>
-              <button id="toggle-theme2">☀️</button>
-              <button id="logout-btn">Salir</button>
-            </div>
-          </header>
+      <div class="form">
+        <label>Usuario</label>
+        <input type="text" id="username" placeholder="Ingrese su usuario">
+        
+        <label>Contraseña</label>
+        <input type="password" id="password" placeholder="Ingrese su contraseña">
 
-          <nav class="tabs">
-            <button data-tab="dashboard" class="active">Panel</button>
-            <button data-tab="incidents">Incidentes</button>
-            <button data-tab="personnel">Personal</button>
-            <button data-tab="vehicles">Vehículos</button>
-            <button data-tab="reports">Informes</button>
-            <button data-tab="schedule">Turnos</button>
-          </nav>
+        <button id="login-btn">Iniciar Sesión</button>
+        <p class="info">(use cualquier usuario/contraseña)</p>
+      </div>
+    </div>
+  </div>
 
-          <main id="content"></main>
-        </div>
-
-        <script src="script.js"></script>
-      </body>
-      </html>
+  <script>
+    // Evita redirección infinita si llegás desde "Salir"
+    const loggedUser = localStorage.getItem('usuario');
+    const cameFromLogout = sessionStorage.getItem('fromLogout');
+  
+    if (loggedUser && !cameFromLogout) {
+      window.location.href = 'inicio.html';
+    } else {
+      // Limpia el indicador temporal si venís del logout
+      sessionStorage.removeItem('fromLogout');
+    }
+  
+    // Tema
+    let isDark = true;
+    const toggleTheme = document.getElementById('toggle-theme');
+    toggleTheme.addEventListener('click', () => {
+      isDark = !isDark;
+      document.body.className = isDark ? 'dark' : 'light';
+      toggleTheme.textContent = isDark ? '☀️' : '🌙';
+    });
+  
+    // Login simulado
+    document.getElementById('login-btn').addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+  
+      if (username && password) {
+        localStorage.setItem('usuario', username);
+        sessionStorage.removeItem('fromLogout');
+        window.location.href = 'inicio.html';
+      } else {
+        alert("Por favor, ingrese usuario y contraseña.");
+      }
+    });
+  </script>
+</body>
+</html>
