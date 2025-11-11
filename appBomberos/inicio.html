@@ -21,18 +21,21 @@
     </header>
 
     <nav class="tabs">
-      <button data-tab="dashboard" class="active">Resumen</button>
-      <button data-tab="personal">Personal</button>
-      <button data-tab="camiones">Camiones</button>
-      <button data-tab="salidas">Salidas</button>
+      <button onclick="window.location.href='inicio.html'">Resumen</button>
+      <button onclick="window.location.href='personal.html'">Personal</button>
+      <button onclick="window.location.href='camiones.html'">Camiones</button>
     </nav>
 
-    <main id="content"></main>
+    <main class="card-list">
+      <div class="card">
+        <h2>Bienvenido al Sistema</h2>
+        <p>Seleccioná una pestaña para acceder al registro de personal o camiones.</p>
+        <button onclick="window.location.href='index.html'">⬅️ Volver al Login</button>
+      </div>
+    </main>
   </div>
 
-  <script src="script.js"></script>
   <script>
-    // Verifica usuario logueado
     const usuario = localStorage.getItem('usuario');
     const userSpan = document.getElementById('welcome-user');
     if (usuario) {
@@ -41,7 +44,6 @@
       window.location.href = 'index.html';
     }
 
-    // Logout
     document.getElementById('logout-btn').addEventListener('click', () => {
       localStorage.removeItem('usuario');
       window.location.href = 'index.html';
@@ -49,3 +51,4 @@
   </script>
 </body>
 </html>
+

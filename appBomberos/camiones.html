@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Camiones - Sistema Bomberos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark">
+  <header class="header-app">
+    <div class="contenedor-img">
+      <img src="img/logoBombero.png" width="70" height="70" alt="Logo bomberos">
+    </div>
+    <h1>Registro de Camiones</h1>
+    <div class="user-controls">
+      <button onclick="window.location.href='inicio.html'">🏠 Inicio</button>
+      <button onclick="window.location.href='index.html'">⬅️ Salir</button>
+    </div>
+  </header>
+
+  <main class="card-list">
+    <div class="card">
+      <h2>Agregar Camión</h2>
+      <form id="formCamion">
+        <label>Patente</label>
+        <input type="text" id="patente" required>
+
+        <label>Modelo</label>
+        <input type="text" id="modelo" required>
+
+        <label>Año</label>
+        <input type="number" id="anio" required>
+
+        <label>Estado</label>
+        <select id="estado">
+          <option>Operativo</option>
+          <option>En mantenimiento</option>
+          <option>Fuera de servicio</option>
+        </select>
+
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Lista de Camiones</h2>
+      <table border="1" width="100%" id="tablaCamiones">
+        <thead>
+          <tr>
+            <th>Patente</th>
+            <th>Modelo</th>
+            <th>Año</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button style="margin-top:10px; background:#e53935; color:white;" id="borrarTodo">🗑️ Borrar Todo</button>
+      <button style="margin-top:10px;" onclick="window.location.href='inicio.html'">🏠 Volver al Inicio</button>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('formCamion');
+    const tabla = document.querySelector('#tablaCamiones tbody');
+    let camiones = JSON.parse(localStorage.getItem('camiones')) || [];
+
+    function actualizarTabla() {
+      tabla.innerHTML = '';
+      camiones.forEach((c, i) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${c.patente}</td>
+          <td>${c.modelo}</td>
+          <td>${c.anio}</td>
+          <td>${c.estado}</td>
+          <td><button onclick="borrarCamion(${i})">❌</button></td>
+        `;
+        tabla.appendChild(fila);
+      });
+      localStorage.setItem('camiones', JSON.stringify(camiones));
+    }
+
+    function borrarCamion(index) {
+      camiones.splice(index, 1);
+      actualizarTabla();
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const nuevo = {
+        patente: form.patente.value.trim(),
+        modelo: form.modelo.value.trim(),
+        anio: form.anio.value.trim(),
+        estado: form.estado.value
+      };
+      camiones.push(nuevo);
+      form.reset();
+      actualizarTabla();
+    });
+
+    document.getElementById('borrarTodo').addEventListener('click', () => {
+      if (confirm('¿Seguro que querés borrar todos los camiones?')) {
+        camiones = [];
+        actualizarTabla();
+      }
+    });
+
+    actualizarTabla();
+  </script>
+</body>
+</html>

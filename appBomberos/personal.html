@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Personal - Sistema Bomberos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark">
+  <header class="header-app">
+    <div class="contenedor-img">
+      <img src="img/logoBombero.png" width="70" height="70" alt="Logo bomberos">
+    </div>
+    <h1>Registro de Personal</h1>
+    <div class="user-controls">
+      <button onclick="window.location.href='inicio.html'">🏠 Inicio</button>
+      <button onclick="window.location.href='index.html'">⬅️ Salir</button>
+    </div>
+  </header>
+
+  <main class="card-list">
+    <div class="card">
+      <h2>Agregar Empleado</h2>
+      <form id="formPersonal">
+        <label>Nombre y Apellido</label>
+        <input type="text" id="nombre" required>
+
+        <label>DNI</label>
+        <input type="text" id="dni" required>
+
+        <label>Cargo</label>
+        <input type="text" id="cargo" required>
+
+        <label>Teléfono</label>
+        <input type="text" id="telefono">
+
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Lista de Personal</h2>
+      <table border="1" width="100%" id="tablaPersonal">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Cargo</th>
+            <th>Teléfono</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button style="margin-top:10px; background:#e53935; color:white;" id="borrarTodo">🗑️ Borrar Todo</button>
+      <button style="margin-top:10px;" onclick="window.location.href='inicio.html'">🏠 Volver al Inicio</button>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('formPersonal');
+    const tabla = document.querySelector('#tablaPersonal tbody');
+    let empleados = JSON.parse(localStorage.getItem('personal')) || [];
+
+    function actualizarTabla() {
+      tabla.innerHTML = '';
+      empleados.forEach((emp, i) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${emp.nombre}</td>
+          <td>${emp.dni}</td>
+          <td>${emp.cargo}</td>
+          <td>${emp.telefono}</td>
+          <td><button onclick="borrarEmpleado(${i})">❌</button></td>
+        `;
+        tabla.appendChild(fila);
+      });
+      localStorage.setItem('personal', JSON.stringify(empleados));
+    }
+
+    function borrarEmpleado(index) {
+      empleados.splice(index, 1);
+      actualizarTabla();
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const nuevo = {
+        nombre: form.nombre.value.trim(),
+        dni: form.dni.value.trim(),
+        cargo: form.cargo.value.trim(),
+        telefono: form.telefono.value.trim()
+      };
+      empleados.push(nuevo);
+      form.reset();
+      actualizarTabla();
+    });
+
+    document.getElementById('borrarTodo').addEventListener('click', () => {
+      if (confirm('¿Seguro que querés borrar todos los empleados?')) {
+        empleados = [];
+        actualizarTabla();
+      }
+    });
+
+    actualizarTabla();
+  </script>
+</body>
+</html>
+
+
+

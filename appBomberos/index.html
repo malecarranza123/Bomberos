@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -28,18 +28,15 @@
   </div>
 
   <script>
-    // Evita redirección infinita si llegás desde "Salir"
     const loggedUser = localStorage.getItem('usuario');
     const cameFromLogout = sessionStorage.getItem('fromLogout');
-  
+
     if (loggedUser && !cameFromLogout) {
       window.location.href = 'inicio.html';
     } else {
-      // Limpia el indicador temporal si venís del logout
       sessionStorage.removeItem('fromLogout');
     }
-  
-    // Tema
+
     let isDark = true;
     const toggleTheme = document.getElementById('toggle-theme');
     toggleTheme.addEventListener('click', () => {
@@ -47,12 +44,10 @@
       document.body.className = isDark ? 'dark' : 'light';
       toggleTheme.textContent = isDark ? '☀️' : '🌙';
     });
-  
-    // Login simulado
+
     document.getElementById('login-btn').addEventListener('click', () => {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
-  
       if (username && password) {
         localStorage.setItem('usuario', username);
         sessionStorage.removeItem('fromLogout');

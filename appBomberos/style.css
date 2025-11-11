@@ -1,3 +1,4 @@
+/* ======== GENERAL ======== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -12,22 +13,23 @@ body {
   color: #111;
 }
 
-/* Login */
+.hidden {
+  display: none;
+}
+
+/* ======== LOGIN ======== */
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
-.hidden {
-  display: none;
-}
 .card {
   background: #222;
   padding: 2rem;
   border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+  width: 400px;
+  max-width: 90%;
   color: #fff;
 }
 .light .card {
@@ -39,12 +41,13 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-input {
+input, select {
   width: 100%;
   padding: 10px;
   margin-bottom: 12px;
   border-radius: 6px;
   border: none;
+  font-size: 1rem;
 }
 button {
   padding: 10px 16px;
@@ -58,6 +61,9 @@ button {
   color: white;
   width: 100%;
 }
+button:hover {
+  opacity: 0.9;
+}
 .info {
   text-align: center;
   font-size: 0.9rem;
@@ -65,14 +71,14 @@ button {
   opacity: 0.8;
 }
 
-/* App */
+/* ======== HEADER APP ======== */
 .header-app {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(90deg, #E9842B, #992828);
   color: white;
-  padding: 1rem;
+  padding: 1rem 2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 .light .header-app {
@@ -80,25 +86,25 @@ button {
   color: white;
 }
 .header-app img {
-  margin-right: 1rem;       /* Separación entre logo y título */
-  display: block;            /* Evita espacios extra */
+  margin-right: 1rem;
+  display: block;
 }
 .header-app h1 {
-  margin: 0;                 /* Quita margen por defecto */
-  font-size: 1.5rem;
+  margin: 0;
+  font-size: 1.8rem;
 }
 .user-controls {
-  margin-left: auto;         /* Empuja los controles al extremo derecho */
   display: flex;
   align-items: center;
-  gap: 0.5rem;               /* Espacio entre botones y texto */
+  gap: 0.5rem;
 }
+
+/* ======== NAV ======== */
 .tabs {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
   background: #333;
-  padding: 10px;
+  padding: 10px 2rem;
 }
 .light .tabs {
   background: #eee;
@@ -107,8 +113,9 @@ button {
   background: #555;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 10px 16px;
   border-radius: 6px;
+  font-size: 1rem;
 }
 .light .tabs button {
   background: #ddd;
@@ -117,17 +124,89 @@ button {
 .tabs button.active {
   background: #e53935;
 }
+
+/* ======== MAIN CONTENT ======== */
 .card-list {
-  display: grid;
-  gap: 10px;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
 }
-.item {
+.card {
   background: #222;
-  padding: 1rem;
-  border-radius: 8px;
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
-.light .item {
+.light .card {
   background: #fff;
-  border: 1px solid #ccc;
+  color: #000;
 }
+.card h2 {
+  margin-top: 0;
+}
+
+/* ======== TABLES ======== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+th, td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background: #e53935;
+  color: white;
+}
+.light th {
+  background: #ff6b6b;
+}
+tr:nth-child(even) {
+  background: #333;
+}
+.light tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+/* ======== BUTTONS ======== */
+button#borrarTodo {
+  background: #e53935;
+  color: white;
+  font-weight: bold;
+}
+button#borrarTodo:hover {
+  background: #c62828;
+}
+button.volver-inicio {
+  background: #666;
+  color: white;
+  margin-top: 10px;
+}
+button.volver-inicio:hover {
+  background: #444;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 900px) {
+  .card-list {
+    padding: 1rem;
+  }
+  .header-app {
+    flex-direction: column;
+    text-align: center;
+  }
+  .tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  table {
+    font-size: 0.9rem;
+  }
+}
+
