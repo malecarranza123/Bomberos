@@ -38,8 +38,9 @@ body {
 }
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 input, select {
   width: 100%;
@@ -49,6 +50,25 @@ input, select {
   border: none;
   font-size: 1rem;
 }
+
+/* Botón para cambiar tema */
+#toggle-theme {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.2s ease;
+  color: inherit; /* para que cambie con el tema */
+}
+
+#toggle-theme:hover {
+  transform: scale(1.2);
+}
+
 button {
   padding: 10px 16px;
   border: none;
@@ -209,4 +229,3 @@ button.volver-inicio:hover {
     font-size: 0.9rem;
   }
 }
-
