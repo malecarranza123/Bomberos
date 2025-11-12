@@ -3,15 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de Personal - Sistema Bomberos</title>
+  <title>Personal - Sistema Bomberos</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* === Modal === */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #222;
+      color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 400px;
+      max-width: 90%;
+    }
+    .light .modal-content {
+      background: #fff;
+      color: #000;
+    }
+    .close {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body class="dark">
   <header class="header-app">
     <div class="contenedor-img">
-      <img src="img/logoBombero.png" width="70" height="70" alt="Logo bomberos">
+      <img src="img/logoBombero.png" width="70" height="70">
     </div>
-    <h1>Registro de Personal</h1>
+    <h1>Gestión del Personal</h1>
     <div class="user-controls">
       <button onclick="window.location.href='inicio.html'">🏠 Inicio</button>
       <button onclick="window.location.href='index.html'">⬅️ Salir</button>
@@ -20,26 +50,8 @@
 
   <main class="card-list">
     <div class="card">
-      <h2>Agregar Empleado</h2>
-      <form id="formPersonal">
-        <label>Nombre y Apellido</label>
-        <input type="text" id="nombre" required>
-
-        <label>DNI</label>
-        <input type="text" id="dni" required>
-
-        <label>Cargo</label>
-        <input type="text" id="cargo" required>
-
-        <label>Teléfono</label>
-        <input type="text" id="telefono">
-
-        <button type="submit">Registrar</button>
-      </form>
-    </div>
-
-    <div class="card">
       <h2>Lista de Personal</h2>
+      <button id="abrirModal">➕ Agregar Nuevo</button>
       <table border="1" width="100%" id="tablaPersonal">
         <thead>
           <tr>
@@ -52,10 +64,28 @@
         </thead>
         <tbody></tbody>
       </table>
-      <button style="margin-top:10px; background:#e53935; color:white;" id="borrarTodo">🗑️ Borrar Todo</button>
-      <button style="margin-top:10px;" onclick="window.location.href='inicio.html'">🏠 Volver al Inicio</button>
+      <button id="borrarTodo" style="margin-top:10px; background:#e53935; color:white;">🗑️ Borrar Todo</button>
     </div>
   </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="cerrarModal">&times;</span>
+      <h2>Agregar Nuevo Empleado</h2>
+      <form id="formPersonal">
+        <label>Nombre y Apellido</label>
+        <input type="text" id="nombre" required>
+        <label>DNI</label>
+        <input type="text" id="dni" required>
+        <label>Cargo</label>
+        <input type="text" id="cargo" required>
+        <label>Teléfono</label>
+        <input type="text" id="telefono">
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
 
   <script>
     const form = document.getElementById('formPersonal');
@@ -78,8 +108,8 @@
       localStorage.setItem('personal', JSON.stringify(empleados));
     }
 
-    function borrarEmpleado(index) {
-      empleados.splice(index, 1);
+    function borrarEmpleado(i) {
+      empleados.splice(i, 1);
       actualizarTabla();
     }
 
@@ -93,15 +123,27 @@
       };
       empleados.push(nuevo);
       form.reset();
+      cerrarModal();
       actualizarTabla();
     });
 
     document.getElementById('borrarTodo').addEventListener('click', () => {
-      if (confirm('¿Seguro que querés borrar todos los empleados?')) {
+      if (confirm('¿Seguro que querés borrar todo el personal?')) {
         empleados = [];
         actualizarTabla();
       }
     });
+
+    // Modal
+    const modal = document.getElementById('modal');
+    const abrir = document.getElementById('abrirModal');
+    const cerrar = document.getElementById('cerrarModal');
+
+    abrir.addEventListener('click', () => modal.style.display = 'flex');
+    cerrar.addEventListener('click', cerrarModal);
+    function cerrarModal() { modal.style.display = 'none'; }
+
+    window.onclick = e => { if (e.target == modal) cerrarModal(); }
 
     actualizarTabla();
   </script>
