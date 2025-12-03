@@ -15,11 +15,24 @@
       <h1>Sistema de Gestión de Bomberos</h1>
       <div class="user-controls">
         <span id="welcome-user"></span>
-        <button id="toggle-theme2">☀️</button>
+        <button id="togglethemeDos">☀️</button>
         <button id="logout-btn">Salir</button>
       </div>
     </header>
-
+    
+    <script>
+      // Modo claro/oscuro
+      let isDark = true;
+      
+      const togglethemeDos = document.getElementById('togglethemeDos');
+      
+      togglethemeDos.addEventListener('click', () => {
+        isDark = !isDark;
+        document.body.className = isDark ? 'dark' : 'light';
+        togglethemeDos.textContent = isDark ? '☀️' : '🌙';
+      });
+      </script>
+      
     <nav class="tabs">
       <button onclick="window.location.href='inicio.html'">Resumen</button>
       <button onclick="window.location.href='personal.html'">Personal</button>

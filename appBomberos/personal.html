@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal - Sistema Bomberos</title>
   <link rel="stylesheet" href="style.css">
+
   <style>
     /* === Modal === */
     .modal {
@@ -34,17 +35,43 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
+
+    /* === BOTÓN DE MODO CLARO/OSCURO === */
+    #togglethemeDos {
+      background: transparent;
+      padding: 8px 14px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+    #togglethemeDos:hover {
+      transform: scale(1.08);
+      opacity: 0.9;
+    }
+    .light #togglethemeDos {
+      color: black;
+      border-color: rgba(0,0,0,0.3);
+    }
   </style>
 </head>
+
 <body class="dark">
   <header class="header-app">
     <div class="contenedor-img">
       <img src="img/logoBombero.png" width="70" height="70">
     </div>
     <h1>Gestión del Personal</h1>
+
     <div class="user-controls">
-      <button onclick="window.location.href='inicio.html'">🏠 Inicio</button>
-      <button onclick="window.location.href='index.html'">⬅️ Salir</button>
+
+      <!-- BOTÓN PARA CAMBIAR TEMA -->
+      <button id="togglethemeDos">☀️</button>
+
+      <button onclick="window.location.href='inicio.html'">Inicio</button>
+      <button onclick="window.location.href='index.html'">⬅ Salir</button>
     </div>
   </header>
 
@@ -52,6 +79,7 @@
     <div class="card">
       <h2>Lista de Personal</h2>
       <button id="abrirModal">➕ Agregar Nuevo</button>
+
       <table border="1" width="100%" id="tablaPersonal">
         <thead>
           <tr>
@@ -64,7 +92,8 @@
         </thead>
         <tbody></tbody>
       </table>
-      <button id="borrarTodo" style="margin-top:10px; background:#e53935; color:white;">🗑️ Borrar Todo</button>
+
+      <button id="borrarTodo" style="margin-top:10px; background:#e53935; color:white;">Borrar Todo</button>
     </div>
   </main>
 
@@ -73,15 +102,20 @@
     <div class="modal-content">
       <span class="close" id="cerrarModal">&times;</span>
       <h2>Agregar Nuevo Empleado</h2>
+
       <form id="formPersonal">
         <label>Nombre y Apellido</label>
         <input type="text" id="nombre" required>
+
         <label>DNI</label>
         <input type="text" id="dni" required>
+
         <label>Cargo</label>
         <input type="text" id="cargo" required>
+
         <label>Teléfono</label>
         <input type="text" id="telefono">
+
         <button type="submit">Guardar</button>
       </form>
     </div>
@@ -146,6 +180,17 @@
     window.onclick = e => { if (e.target == modal) cerrarModal(); }
 
     actualizarTabla();
+
+    /* === SCRIPT DEL TEMA === */
+    let isDark = true;
+    const togglethemeDos = document.getElementById('togglethemeDos');
+
+    togglethemeDos.addEventListener('click', () => {
+      isDark = !isDark;
+      document.body.className = isDark ? 'dark' : 'light';
+      togglethemeDos.textContent = isDark ? '☀️' : '🌙';
+    });
   </script>
+
 </body>
 </html>

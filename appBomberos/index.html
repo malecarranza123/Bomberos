@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark">
-  <button id="toggle-theme">☀️</button>
+  <button id="toggletheme">☀️</button>
   <div id="login" class="container">
     <div class="card">
       <div class="header">
@@ -38,11 +38,11 @@
     }
 
     let isDark = true;
-    const toggleTheme = document.getElementById('toggle-theme');
-    toggleTheme.addEventListener('click', () => {
+    const toggletheme = document.getElementById('toggletheme');
+    toggletheme.addEventListener('click', () => {
       isDark = !isDark;
       document.body.className = isDark ? 'dark' : 'light';
-      toggleTheme.textContent = isDark ? '☀️' : '🌙';
+      toggletheme.textContent = isDark ? '☀️' : '🌙';
     });
 
     document.getElementById('login-btn').addEventListener('click', () => {

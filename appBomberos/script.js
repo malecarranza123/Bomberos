@@ -42,7 +42,7 @@ const detalleEmpleadoCamion = [
 // ---- Interfaz ----
 const tabs = document.querySelectorAll('.tabs button');
 const content = document.getElementById('content');
-const toggleTheme2 = document.getElementById('toggle-theme2');
+const toggletheme2 = document.getElementById('togglethemeDos');
 
 let isDark = true;
 
@@ -117,10 +117,11 @@ function renderTab(tab) {
 }
 
 // Tema
-toggleTheme2.addEventListener('click', () => {
+const togglethemeDos = document.getElementById('togglethemeDos');
+togglethemeDos.addEventListener('click', () => {
   isDark = !isDark;
   document.body.className = isDark ? 'dark' : 'light';
-  toggleTheme2.textContent = isDark ? '☀️' : '🌙';
+  togglethemeDos.textContent = isDark ? '☀️' : '🌙';
 });
 
 // Render inicial
