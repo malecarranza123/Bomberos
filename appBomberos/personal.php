@@ -80,4 +80,128 @@ $usuario = $_SESSION['usuario'];
     <div class="user-controls">
       <button id="togglethemeDos">☀️</button>
 
-      <button onclick="window.locati
+      <button onclick="window.location.href='inicio.php'">Inicio</button>
+      <a href="logout.php"><button>⬅ Salir</button></a>
+    </div>
+  </header>
+
+  <main class="card-list">
+    <div class="card">
+      <h2>Lista de Personal</h2>
+      <button id="abrirModal">➕ Agregar Nuevo</button>
+
+      <table border="1" width="100%" id="tablaPersonal">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Cargo</th>
+            <th>Teléfono</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <button id="borrarTodo" style="margin-top:10px; background:#e53935; color:white;">Borrar Todo</button>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="cerrarModal">&times;</span>
+      <h2>Agregar Nuevo Empleado</h2>
+
+      <form id="formPersonal">
+        <label>Nombre y Apellido</label>
+        <input type="text" id="nombre" required>
+
+        <label>DNI</label>
+        <input type="text" id="dni" required>
+
+        <label>Cargo</label>
+        <input type="text" id="cargo" required>
+
+        <label>Teléfono</label>
+        <input type="text" id="telefono">
+
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formPersonal');
+    const tabla = document.querySelector('#tablaPersonal tbody');
+    let empleados = JSON.parse(localStorage.getItem('personal')) || [];
+
+    function actualizarTabla() {
+      tabla.innerHTML = '';
+      empleados.forEach((emp, i) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${emp.nombre}</td>
+          <td>${emp.dni}</td>
+          <td>${emp.cargo}</td>
+          <td>${emp.telefono}</td>
+          <td><button onclick="borrarEmpleado(${i})">❌</button></td>
+        `;
+        tabla.appendChild(fila);
+      });
+      localStorage.setItem('personal', JSON.stringify(empleados));
+    }
+
+    function borrarEmpleado(i) {
+      empleados.splice(i, 1);
+      actualizarTabla();
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const nuevo = {
+        nombre: form.nombre.value.trim(),
+        dni: form.dni.value.trim(),
+        cargo: form.cargo.value.trim(),
+        telefono: form.telefono.value.trim()
+      };
+      empleados.push(nuevo);
+      form.reset();
+      cerrarModal();
+      actualizarTabla();
+    });
+
+    document.getElementById('borrarTodo').addEventListener('click', () => {
+      if (confirm('¿Seguro que querés borrar todo el personal?')) {
+        empleados = [];
+        actualizarTabla();
+      }
+    });
+
+    // Modal
+    const modal = document.getElementById('modal');
+    const abrir = document.getElementById('abrirModal');
+    const cerrar = document.getElementById('cerrarModal');
+
+    abrir.addEventListener('click', () => modal.style.display = 'flex');
+    cerrar.addEventListener('click', cerrarModal);
+    function cerrarModal() { modal.style.display = 'none'; }
+
+    window.onclick = e => { if (e.target == modal) cerrarModal(); }
+
+    actualizarTabla();
+
+    /* === SCRIPT DEL TEMA === */
+    let isDark = true;
+    const togglethemeDos = document.getElementById('togglethemeDos');
+
+    togglethemeDos.addEventListener('click', () => {
+      isDark = !isDark;
+      document.body.className = isDark ? 'dark' : 'light';
+      togglethemeDos.textContent = isDark ? '☀️' : '🌙';
+    });
+  </script>
+
+</body>
+</html>
+

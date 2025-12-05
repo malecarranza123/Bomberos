@@ -51,6 +51,7 @@ $usuario = $_SESSION['usuario'];
       <button onclick="window.location.href='inicio.php'">Resumen</button>
       <button onclick="window.location.href='personal.php'">Personal</button>
       <button onclick="window.location.href='camiones.php'">Camiones</button>
+      <button onclick="window.location.href='salidas.php'">Salidas</button>
     </nav>
 
     <main class="card-list">
